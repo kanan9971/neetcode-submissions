@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int left = 0;
+        int right = nums.size()-1; //index of where it is stored
+
+        if(nums[left]== target ){
+            return left;
+        }
+
+        if(nums[right]==target){
+            return right;
+        }
+
+        
+        while(left < right){
+            int mid = left + (right - left)/2; // done to stop overflow
+
+            if(nums[mid]== target){
+                return mid;
+            }
+
+           else  if(nums[mid]>nums[right]){
+                if(nums[mid]  > target && nums[left]  < target){
+                    right = mid;
+                }
+
+                else {
+                    left = mid+1;
+                }
+            }
+
+            else if (nums[mid] < nums[right]){
+                if(nums[mid] < target && nums[right]>target){
+                    left = mid+1;
+                }
+
+                else {
+                    right = mid;
+                }
+            }
+        }
+
+        return -1;
+    }
+};
